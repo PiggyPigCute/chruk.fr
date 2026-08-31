@@ -33,5 +33,12 @@
     "description": "Recensement coopératif des micronations.",
     "image": "img/microlist.svg",
     "url": "https://microlist.ernestie.fr"
+  },
+  {
+    "id": "coim",
+    "name": "COIM",
+    "description": "Site officiel du COIM (Comité Olympique InterMicronational).",
+    "image": "img/coim.png",
+    "url": "https://coim.chruk.fr"
   }
 ]
