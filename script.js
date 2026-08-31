@@ -10,6 +10,12 @@ async function loadSites() {
   const response = await fetch("data/sites.json");
   const sites = await response.json();
 
+  // Negative delays must be expressed in the same unit as --period, so we
+  // read its actual value instead of hardcoding a duplicate constant.
+  const periodSeconds = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue("--period"),
+  );
+
   sites.forEach((site, index) => {
     // An ellipse tilted by 180° traces the very same curve, so distinct
     // tilts only need to span half a turn for every orbit to look unique.
@@ -21,6 +27,12 @@ async function loadSites() {
 
     const path = document.createElement("div");
     path.className = "orbit-path";
+
+    const mover = document.createElement("div");
+    mover.className = "orbit-mover";
+    // A negative delay starts the animation already partway through,
+    // giving each orbit a random starting point on its ellipse.
+    mover.style.animationDelay = `-${(Math.random() * periodSeconds).toFixed(2)}s`;
 
     const btn = document.createElement("button");
     btn.className = "orbit-btn";
@@ -35,7 +47,8 @@ async function loadSites() {
     btn.appendChild(img);
     btn.addEventListener("click", () => openModal(site));
 
-    item.append(path, btn);
+    mover.appendChild(btn);
+    item.append(path, mover);
     track.appendChild(item);
   });
 

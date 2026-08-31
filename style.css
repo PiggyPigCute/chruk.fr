@@ -3,9 +3,9 @@
   --gold: #ffd77a;
   --panel-dark: #150a2c;
   --violet: #80265c;
-  --period: 55s;
-  --orbit-rx: 41vmin;
-  --orbit-ry: 16.4vmin;
+  --period: 20s;
+  --orbit-rx: 34vmin;
+  --orbit-ry: 13.5vmin;
 }
 
 * {
@@ -46,17 +46,39 @@ html, body {
   height: min(92vmin, 900px);
 }
 
-.mascot {
+.mascot-btn {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: clamp(120px, 30vmin, 320px);
-  width: auto;
-  filter: drop-shadow(0 0 34px rgba(190, 100, 255, 0.55));
+  transform: translate(-50%, -50%);
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(10px, 2vmin, 20px) clamp(16px, 3.2vmin, 30px);
+  border-radius: 28px;
+  border: 2px solid rgba(246, 239, 226, 0.3);
+  background: linear-gradient(155deg, rgba(128, 38, 92, 0.55), rgba(21, 10, 44, 0.55));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.mascot-btn:hover,
+.mascot-btn:focus-visible {
+  transform: translate(-50%, -50%) scale(1.08);
+  border-color: var(--gold);
+  box-shadow: 0 0 26px rgba(255, 210, 130, 0.6), 0 6px 18px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+.mascot {
+  height: clamp(110px, 26vmin, 280px);
+  width: auto;
+  filter: drop-shadow(0 0 24px rgba(190, 100, 255, 0.5));
   user-select: none;
   pointer-events: none;
-  animation: mascot-pulse var(--period) ease-in-out infinite;
 }
 
 .orbit-track {
@@ -85,10 +107,24 @@ html, body {
   pointer-events: none;
 }
 
+/* Full-size mover: offset-path's "at 50% 50%" resolves against this
+   element's OWN border box, so it must span the whole square (matching
+   .orbit-item) to stay centered on Chrûk — a small box here (e.g. sized
+   to the button) would anchor the ellipse near a corner instead. */
+.orbit-mover {
+  position: absolute;
+  inset: 0;
+  offset-path: ellipse(var(--orbit-rx) var(--orbit-ry) at 50% 50%);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  animation: orbit-move var(--period) linear infinite;
+  animation-play-state: running;
+}
+
 .orbit-btn {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: clamp(52px, 9vmin, 90px);
   height: clamp(52px, 9vmin, 90px);
   padding: 12%;
@@ -102,11 +138,7 @@ html, body {
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
-  offset-path: ellipse(var(--orbit-rx) var(--orbit-ry) at 50% 50%);
-  offset-distance: 0%;
-  offset-rotate: 0deg;
-  transform: rotate(calc(-1 * var(--tilt)));
-  animation: orbit-move var(--period) linear infinite;
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--tilt)));
 }
 
 .orbit-btn img {
@@ -117,7 +149,7 @@ html, body {
 
 .orbit-btn:hover,
 .orbit-btn:focus-visible {
-  transform: rotate(calc(-1 * var(--tilt))) scale(1.14);
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--tilt))) scale(1.14);
   border-color: var(--gold);
   box-shadow: 0 0 22px rgba(255, 210, 130, 0.55), 0 6px 18px rgba(0, 0, 0, 0.4);
   outline: none;
@@ -128,14 +160,8 @@ html, body {
   to { offset-distance: 100%; }
 }
 
-@keyframes mascot-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.05); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .orbit-btn,
-  .mascot {
+  .orbit-mover {
     animation: none;
   }
 }
