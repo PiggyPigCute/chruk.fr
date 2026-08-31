@@ -86,6 +86,11 @@ html, body {
 .orbit-track {
   position: absolute;
   inset: 0;
+  /* This box spans the whole scene (it has to, for .orbit-path/.orbit-btn
+     to center on Chrûk) and, despite being invisible, would otherwise
+     intercept every click over that area — including on Chrûk himself,
+     underneath. Only the actual buttons should be clickable. */
+  pointer-events: none;
 }
 
 /* The visible ring: a plain ellipse, tilted, centered on Chrûk. Purely
@@ -120,6 +125,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: auto;
   width: clamp(58px, 9vmin, 92px);
   height: clamp(58px, 9vmin, 92px);
   /* Not a %: percentage padding resolves against the containing block's
