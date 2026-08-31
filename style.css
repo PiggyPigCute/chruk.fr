@@ -2,6 +2,10 @@
   --cream: #f6efe2;
   --gold: #ffd77a;
   --panel-dark: #150a2c;
+  --violet: #80265c;
+  --period: 55s;
+  --orbit-rx: 41vmin;
+  --orbit-ry: 16.4vmin;
 }
 
 * {
@@ -46,47 +50,63 @@ html, body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  height: 32%;
+  height: clamp(120px, 30vmin, 320px);
   width: auto;
   filter: drop-shadow(0 0 34px rgba(190, 100, 255, 0.55));
   z-index: 2;
   user-select: none;
   pointer-events: none;
+  animation: mascot-pulse var(--period) ease-in-out infinite;
 }
 
 .orbit-track {
   position: absolute;
   inset: 0;
-  animation: spin 110s linear infinite;
 }
 
+/* Each item is a fixed rotation (tilt) of the very same ellipse, all
+   centered on Chrûk — like the electron shells of an atom diagram. Only
+   the tilt tells the orbits apart; radius, shape and period are shared. */
 .orbit-item {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--tilt));
+}
+
+.orbit-path {
   position: absolute;
   top: 50%;
   left: 50%;
-  --radius: 40vmin;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1 * var(--angle)));
-}
-
-.orbit-spin {
-  animation: spin-reverse 110s linear infinite;
+  width: calc(var(--orbit-rx) * 2);
+  height: calc(var(--orbit-ry) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 215, 130, 0.28);
+  pointer-events: none;
 }
 
 .orbit-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: clamp(52px, 9vmin, 90px);
   height: clamp(52px, 9vmin, 90px);
   padding: 12%;
   border-radius: 24%;
   border: 2px solid rgba(246, 239, 226, 0.3);
-  background: linear-gradient(155deg, rgba(50, 24, 90, 0.8), rgba(14, 7, 32, 0.88));
+  background: linear-gradient(155deg, rgba(128, 38, 92, 0.85), rgba(21, 10, 44, 0.9));
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  offset-path: ellipse(var(--orbit-rx) var(--orbit-ry) at 50% 50%);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  transform: rotate(calc(-1 * var(--tilt)));
+  animation: orbit-move var(--period) linear infinite;
 }
 
 .orbit-btn img {
@@ -97,25 +117,25 @@ html, body {
 
 .orbit-btn:hover,
 .orbit-btn:focus-visible {
-  transform: scale(1.14);
+  transform: rotate(calc(-1 * var(--tilt))) scale(1.14);
   border-color: var(--gold);
   box-shadow: 0 0 22px rgba(255, 210, 130, 0.55), 0 6px 18px rgba(0, 0, 0, 0.4);
   outline: none;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes orbit-move {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
 }
 
-@keyframes spin-reverse {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+@keyframes mascot-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orbit-track,
-  .orbit-spin {
+  .orbit-btn,
+  .mascot {
     animation: none;
   }
 }

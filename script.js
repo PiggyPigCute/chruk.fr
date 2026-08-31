@@ -11,14 +11,16 @@ async function loadSites() {
   const sites = await response.json();
 
   sites.forEach((site, index) => {
-    const angle = (360 / sites.length) * index;
+    // An ellipse tilted by 180° traces the very same curve, so distinct
+    // tilts only need to span half a turn for every orbit to look unique.
+    const tilt = (180 / sites.length) * index;
 
     const item = document.createElement("div");
     item.className = "orbit-item";
-    item.style.setProperty("--angle", `${angle}deg`);
+    item.style.setProperty("--tilt", `${tilt}deg`);
 
-    const spin = document.createElement("div");
-    spin.className = "orbit-spin";
+    const path = document.createElement("div");
+    path.className = "orbit-path";
 
     const btn = document.createElement("button");
     btn.className = "orbit-btn";
@@ -33,8 +35,7 @@ async function loadSites() {
     btn.appendChild(img);
     btn.addEventListener("click", () => openModal(site));
 
-    spin.appendChild(btn);
-    item.appendChild(spin);
+    item.append(path, btn);
     track.appendChild(item);
   });
 
