@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ernestie",
+    "name": "Site de l'Ernestie",
+    "description": "Le site officiel de la micronation de l'Ernestie.",
+    "image": "img/ernestie.png",
+    "url": "https://ernestie.fr"
+  },
+  {
+    "id": "dico",
+    "name": "Dictionnaire ernestien",
+    "description": "Dictionnaire interactif en ligne entre le français et l'ernestien.",
+    "image": "img/dico.svg",
+    "url": "https://ernestie.fr/dico"
+  },
+  {
+    "id": "crack",
+    "name": "Crack",
+    "description": "Crack, The Gang... Jeu de poker coopératif en ligne.",
+    "image": "img/crack.png",
+    "url": "https://crack.chruk.fr"
+  },
+  {
+    "id": "ketostickers",
+    "name": "Ketostickers",
+    "description": "Carte en ligne interactive recensant les stickers de la Kétonie posés dans le monde.",
+    "image": "img/ketostickers.png",
+    "url": "https://ketostickers.chruk.fr"
+  },
+  {
+    "id": "microlist",
+    "name": "Microlist",
+    "description": "Recensement coopératif des micronations.",
+    "image": "img/microlist.svg",
+    "url": "https://microlist.ernestie.fr"
+  }
+]

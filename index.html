@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chruk.fr</title>
+<meta name="description" content="Portail vers les sites de Chrûk">
+<link rel="icon" href="img/chruuuk.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scene">
+  <img class="bg" src="img/galaxy_background.jpg" alt="">
+
+  <div class="orbit-system">
+    <img class="mascot" src="img/chruuuk.svg" alt="Chrûk">
+    <div class="orbit-track" id="orbitTrack"></div>
+  </div>
+</div>
+
+<dialog id="siteModal" class="site-modal">
+  <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+  <img id="modalImage" class="modal-image" src="" alt="">
+  <h2 id="modalTitle"></h2>
+  <p id="modalDesc"></p>
+  <a id="modalLink" class="modal-link" href="#" target="_blank" rel="noopener noreferrer">Visiter le site →</a>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
