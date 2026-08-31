@@ -1,11 +1,5 @@
 async function loadSites() {
   const track = document.getElementById("orbitTrack");
-  const modal = document.getElementById("siteModal");
-  const modalImage = document.getElementById("modalImage");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDesc = document.getElementById("modalDesc");
-  const modalLink = document.getElementById("modalLink");
-  const modalClose = document.getElementById("modalClose");
 
   const response = await fetch("data/sites.json");
   const sites = await response.json();
@@ -33,18 +27,27 @@ async function loadSites() {
     const slot = document.createElement("div");
     slot.className = "orbit-slot";
 
-    const btn = document.createElement("button");
+    const btn = document.createElement("a");
     btn.className = "orbit-btn";
-    btn.type = "button";
-    btn.setAttribute("aria-label", site.name);
+    btn.href = site.url;
+    btn.target = "_blank";
+    btn.rel = "noopener noreferrer";
+    btn.setAttribute("aria-label", `${site.name} — ${site.description}`);
 
     const img = document.createElement("img");
     img.src = site.image;
     img.alt = "";
     img.loading = "lazy";
 
-    btn.appendChild(img);
-    btn.addEventListener("click", () => openModal(site));
+    const tooltip = document.createElement("span");
+    tooltip.className = "orbit-tooltip";
+    const tooltipName = document.createElement("strong");
+    tooltipName.textContent = site.name;
+    const tooltipDesc = document.createElement("span");
+    tooltipDesc.textContent = site.description;
+    tooltip.append(tooltipName, tooltipDesc);
+
+    btn.append(img, tooltip);
 
     slot.appendChild(btn);
     track.append(path, slot);
@@ -84,20 +87,6 @@ async function loadSites() {
       requestAnimationFrame(frame);
     });
   }
-
-  function openModal(site) {
-    modalImage.src = site.image;
-    modalImage.alt = site.name;
-    modalTitle.textContent = site.name;
-    modalDesc.textContent = site.description;
-    modalLink.href = site.url;
-    modal.showModal();
-  }
-
-  modalClose.addEventListener("click", () => modal.close());
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) modal.close();
-  });
 }
 
 loadSites();
