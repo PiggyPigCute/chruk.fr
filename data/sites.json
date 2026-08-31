@@ -29,7 +29,7 @@
   },
   {
     "id": "microlist",
-    "name": "Microlist",
+    "name": "MicroList",
     "description": "Recensement coopératif des micronations.",
     "image": "img/microlist.svg",
     "url": "https://microlist.ernestie.fr"
