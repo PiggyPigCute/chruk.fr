@@ -122,7 +122,10 @@ html, body {
   left: 0;
   width: clamp(58px, 9vmin, 92px);
   height: clamp(58px, 9vmin, 92px);
-  padding: 16%;
+  /* Not a %: percentage padding resolves against the containing block's
+     WIDTH, which here is .orbit-slot's deliberate 0×0 box — it would
+     always compute to 0. */
+  padding: clamp(10px, 1.5vmin, 16px);
   border-radius: 24%;
   border: 2px solid rgba(246, 239, 226, 0.3);
   background: linear-gradient(155deg, rgba(128, 38, 92, 0.85), rgba(21, 10, 44, 0.9));
