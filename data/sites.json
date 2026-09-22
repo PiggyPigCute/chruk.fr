@@ -1,5 +1,12 @@
 [
   {
+    "id": "cahier",
+    "name": "Cahier de Vivien",
+    "description": "Site regroupement mes prises de notes de cours.",
+    "image": "img/cahier.png",
+    "url": "https://cahier.chruk.fr"
+  },
+  {
     "id": "ernestie",
     "name": "Site de l'Ernestie",
     "description": "Le site officiel de la micronation de l'Ernestie.",
