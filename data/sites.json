@@ -47,5 +47,12 @@
     "description": "Site officiel du COIM (Comité Olympique InterMicronational).",
     "image": "img/coim.png",
     "url": "https://coim.chruk.fr"
+  },
+  {
+    "id": "microballs",
+    "name": "Microballs",
+    "description": "Site lié au bot Discord Microballs",
+    "image": "img/microball_ernestie.png",
+    "url": "https://microballs.chruk.fr"
   }
 ]
