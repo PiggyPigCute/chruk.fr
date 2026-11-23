@@ -54,5 +54,12 @@
     "description": "Site lié au bot Discord Microballs",
     "image": "img/microball_ernestie.png",
     "url": "https://microballs.chruk.fr"
+  },
+  {
+    "id": "orma",
+    "name": "Orchestre Manif'ique",
+    "description": "Site officiel de l'Orchestre Manif'ique",
+    "image": "img/orma.png",
+    "url": "https://orchestre-manifique.chruk.fr"
   }
 ]
